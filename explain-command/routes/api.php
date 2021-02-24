@@ -22,11 +22,15 @@ use Illuminate\Support\Facades\Route;
 
 //PackageManager Routes
 
-Route::resource('package-manager', PackageManagerController::class);
+Route::resource('package-managers', PackageManagerController::class);
 
 //Command Routes
-Route::resource('command', CommandController::class);
+Route::resource('commands', CommandController::class);
 
 //Argument Routes
 
-Route::resource('argument', UserController::class);
+Route::resource('arguments', UserController::class);
+
+Route::fallback(function(){
+    return response()->json(['error' => 'Resource not found.'], 404);
+})->name('fallback');

@@ -6,7 +6,7 @@ use Facade\FlareClient\Http\Response;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use League\CommonMark\Inline\Element\Code;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -50,6 +50,11 @@ class Handler extends ExceptionHandler
         }
         if ($e instanceof QueryException) {
             return parent::render($request, $e);
+        }
+        if ($e instanceof MethodNotAllowedHttpException) {
+            return response()->json([
+                'error' => 'Method not allowed.'
+            ], 405);
         }
         return parent::render($request, $e);
     }
