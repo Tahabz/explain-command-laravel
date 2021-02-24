@@ -35,7 +35,7 @@ class PackageManagerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -44,9 +44,9 @@ class PackageManagerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(PackageManager $packageManager)
     {
-        //
+        return $packageManager;
     }
 
     /**

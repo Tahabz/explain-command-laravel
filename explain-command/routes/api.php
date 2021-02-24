@@ -21,5 +21,12 @@ use Illuminate\Support\Facades\Route;
 
 
 //PackageManager Routes
-// Route::get('/package-manager', [PackageManagerController::class, 'index']);
+
 Route::resource('package-manager', PackageManagerController::class);
+
+//Command Routes
+Route::resource('command', CommandController::class);
+
+//Argument Routes
+
+Route::resource('argument', UserController::class);
