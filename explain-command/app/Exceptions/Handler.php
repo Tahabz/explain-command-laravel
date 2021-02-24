@@ -2,7 +2,11 @@
 
 namespace App\Exceptions;
 
+use Facade\FlareClient\Http\Response;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use League\CommonMark\Inline\Element\Code;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -36,5 +40,17 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $e)
+    {
+        if ($e instanceof ModelNotFoundException) {
+            return response()->json([
+                'error' => 'Entry for '.str_replace('App\\', '', $e->getModel()).' not found'], 404);
+        }
+        if ($e instanceof QueryException) {
+            return parent::render($request, $e);
+        }
+        return parent::render($request, $e);
     }
 }

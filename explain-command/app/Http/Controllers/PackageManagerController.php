@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PackageManagerStoreRequest;
 use App\Models\PackageManager;
 use Illuminate\Http\Request;
 
@@ -33,9 +34,11 @@ class PackageManagerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PackageManagerStoreRequest $request)
     {
-        
+        $packageManager = PackageManager::create($request->all());
+
+        return response()->json($packageManager, 201);
     }
 
     /**
