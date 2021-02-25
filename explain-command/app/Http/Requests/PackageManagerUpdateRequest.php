@@ -33,7 +33,7 @@ class PackageManagerUpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.unique' => 'name should be unique'
+            'name.unique|sometimes' => 'name should be unique'
         ];
     }
 
