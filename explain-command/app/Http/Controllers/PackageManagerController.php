@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PackageManagerStoreRequest;
+use App\Http\Requests\PackageManagerUpdateRequest;
 use App\Models\PackageManager;
 use Illuminate\Http\Request;
 
@@ -70,9 +71,10 @@ class PackageManagerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PackageManagerUpdateRequest $request, PackageManager $packageManager)
     {
-        //
+        $packageManager->update($request->all());
+        return $packageManager;
     }
 
     /**
